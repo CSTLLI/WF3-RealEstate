@@ -1,0 +1,49 @@
+/* ************************************************************************************** */
+/*                                                                                        */																					  
+/* Project: Eval-03	                                    / $$      /$$ /$$$$$$$$ /$$$$$$   */
+/*                  			                        | $$  /$ | $$| $$_____//$$__  $$  */
+/* style.css                                     	    | $$ /$$$| $$| $$     |__/  \ $$  */
+/*                                                  	| $$/$$ $$ $$| $$$$$     /$$$$$/  */
+/* By: vcastell <valeriocastellipro@gmail.com>	        | $$$$_  $$$$| $$__/    |___  $$  */
+/*                                              		| $$$/ \  $$$| $$      /$$  \ $$  */
+/* Created: 2022/02/28 09:00:00 vcastell     	        | $$/   \  $$| $$     |  $$$$$$/  */
+/* Updated: 2022/02/28 17:00:00 vcastell                |__/     \__/|__/      \______/   */
+/*                                                                    				      */
+/******************************************************************************************/
+
+/* IMPORTATIONS */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap'); */
+
+:root{
+    --white: #ffffff;
+    --gray-light: #f5fbfc;
+    --gray-dark: #08090a;
+    --green: #35b8be;
+    --green-dark: #1b9097;
+    --green-light: #f5fbfc;
+    --blue-dark: #546285;
+	--red: #c01d24;
+}
+
+html{
+	font-family: 'Inter', serif;
+}
+
+body{
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background: var(--gray-light);
+}
+
+a{
+	text-decoration: none;
+	color: var(--white);
+	align-items: center;
+}
+
+a:hover{
+	color: var(--gray-dark);
+	transition: 350ms ease-in-out;
+}
