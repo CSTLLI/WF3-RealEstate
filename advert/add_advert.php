@@ -24,6 +24,8 @@
 
 	$categoryManager = new CategoryManager($conn);
 	$categories = $categoryManager->getListCategory();
+
+	//var_dump($categories);
 ?>
 
 		<main>
@@ -77,7 +79,6 @@
 	require_once "../setup/functions.php";
 
 	if (isset($_POST['button'])){
-
 		if (checkInput($_POST['title']) && $_POST['checkbox'] != "default"){
 
 		$title = $_POST['title'];

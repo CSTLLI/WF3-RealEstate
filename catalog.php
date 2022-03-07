@@ -33,7 +33,7 @@
 					<td><?= ucfirst($advert['description']) ?></td>
 					<td><?= $advert['postcode'] ?></td>
 					<td><?= $advert['city'] ?></td>
-					<td><?= $advert['price'] ?></td>
+					<td><?= number_format($advert['price'], 2, ',', ' ') ?> &euro;</td>
 					<td><?= $advert['category'] ?></td>
 					<td><?= $advert['created_at'] ?></td>
 					<td>

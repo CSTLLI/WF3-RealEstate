@@ -6,49 +6,79 @@
 		require 'class/' .$classe. '.class.php';
 	});
 
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
 	$advertManager = new AdvertManager($conn);
-	$adverts = $advertManager->getListAdverts();
+	$advert = $advertManager->getAdvertById($_GET['id']);
+
+	//var_dump($advert);
 ?>
 
-		<h1 class="text-center">Affichage de toutes les annonces</h1>
+		<h1 class="text-center py-3">Détails de l'annonce : <?php echo $advert['title'] ?></h1>
 
-		<table class='table table-hover table-dark w-75 mx-auto my-5 shadow-lg p-3 mb-5 bg-body rounded text-center'>
-			<thead>
-				<tr>
-					<th>TITRE</th>
-					<th>DESCRIPTION</th>
-					<th>CODE POSTAL</th>
-					<th>VILLE</th>
-					<th>PRIX</th>
-					<th>CATEGORIE</th>
-					<th>CREER LE</th>
-					<th>DISPONIBILITE</th>
-					<th>CONSULTER CETTE ANNONCE</th>                      
-				</tr>
-			</thead>
-			<tbody>
-				<!-- <?php foreach ($adverts as $advert):?> -->
-				<tr>
-					<td><?= mb_strtoupper($advert['title']) ?></td>
-					<td><?= ucfirst($advert['description']) ?></td>
-					<td><?= $advert['postcode'] ?></td>
-					<td><?= $advert['city'] ?></td>
-					<td><?= $advert['price'] ?></td>
-					<td><?= $advert['category'] ?></td>
-					<td><?= $advert['created_at'] ?></td>
-					<td>
-						<?php 
-							if ($advert['reservation_message'] == NULL){
-								echo "Disponible";
-							}else{
-								echo "Reservé!";
-							}
-						?>
-					</td>
-					<td><a <?php echo "href=/view.php?id=" . $advert['id_advert'] ?>><i class='bi bi-eye'></i></a></td>
-				</tr>   
-				<!-- <?php endforeach; ?> -->
-			</tbody>
-		</table>
+		<div class="card my-5 mx-auto w-50 text-dark card-body cardbody-color p-lg-5">
+			<p>Prix : <?= number_format($advert['price'], 2, ',', ' ') ?> &euro;</p>
+
+			<p>Description : <?php echo $advert['description'] ?></p>
+
+			<p>Lieu : <?php echo $advert['city'] . " (" . $advert['postcode'] . ")" ?></p>
+
+			<p>Type de vente : <?php echo $advert['category'] ?></p>
+
+			<p>Annonce crée le : <?php echo $advert['created_at']?></p>
+		</div>
+
+		<form action="" method="post" class="card my-5 mx-auto w-50 text-dark card-body cardbody-color p-lg-5" enctype="multipart/form-data">
+
+			<h2 class="text-center">Proposer une offre :</h2>
+
+			<div class="mb-2">
+				<textarea class="form-control" id="message" name="message" rows="3" placeholder="Message de votre proposition"></textarea>
+			</div>
+
+			<div class="text-center">
+				<button type="submit" name="confirm" class="btn btn-danger px-5 mb-5 text-uppercase">Je réserve</button>
+			</div>
+		</form>
+
+		<div class="text-center">
+				<a href="/catalog.php" class="btn btn-primary px-5 mb-5 text-uppercase">Retour</a>
+		</div>
+
 	</body>
 </html>
+
+<?php 
+
+	require('setup/functions.php');
+
+	if (isset($_POST['confirm'])){
+
+		if (checkInput($_POST['message'])){				
+
+			$advertManager = new AdvertManager($conn);
+			$advert = $advertManager->getAdvertById($_GET['id']);
+
+			//var_dump($advert);
+
+			$advertModify = new Advert([
+				'title' => $advert['title'],
+				'description' => $advert['description'], 
+				'postcode' => $advert['postcode'],
+				'city' => $advert['city'],
+				'price' => $advert['price'],
+				'categoryId' => $advert['category_id'],
+				'reservation_message' => $_POST['message']
+			]);
+
+			//var_dump($advertModify);
+
+			if ($advertManager->updateAdvert($advertModify)) {
+				echo "Annonce a bien été réservé !";
+			}else {
+				echo "PROBLEME : L'annonce n'a pas été réservé.";
+			}
+		}
+	}
+?>

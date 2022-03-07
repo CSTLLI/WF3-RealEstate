@@ -29,7 +29,6 @@ class Category{
 		$this->value = $value;
 		return $this;
 	}
-
 }
 
 ?>
