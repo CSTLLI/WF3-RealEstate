@@ -64,12 +64,9 @@
 </html>
 
 <?php 
-
-	require('setup/functions.php');
-
 	if (isset($_POST['confirm'])){
 
-		if (checkInput($_POST['message'])){				
+		if (isset($_POST['message']) && !empty($_POST['message'])){				
 
 			$advertManager = new AdvertManager($conn);
 			$advert = $advertManager->getAdvertById($_GET['id']);
@@ -81,6 +78,7 @@
 			// echo ("message :" . $message);
 
 			if ($advertManager->addReserAdvert($id, $message)) {
+				header("Location:catalog.php");
 				echo "Annonce a bien été réservé !";
 			}else {
 				echo "PROBLEME : L'annonce n'a pas été réservé.";

@@ -21,5 +21,4 @@
 			return $this->bdd->query("SELECT * FROM category")->fetchAll();
 		}
 	}
-
 ?>
