@@ -29,8 +29,9 @@
 			<p>Annonce crée le : <?php echo $advert['created_at']?></p>
 		</div>
 
-		<form action="" method="post" class="card my-5 mx-auto w-50 text-dark card-body cardbody-color p-lg-5" enctype="multipart/form-data">
+		<?php if(empty($advert['reservation_message'])){?>
 
+		<form action="" method="post" class="card my-5 mx-auto w-50 text-dark card-body cardbody-color p-lg-5" enctype="multipart/form-data">
 			<h2 class="text-center">Proposer une offre :</h2>
 
 			<div class="mb-2">
@@ -42,8 +43,21 @@
 			</div>
 		</form>
 
+		<?php }else{ ?>
+
+		<form action="" method="post" class="card my-5 mx-auto w-50 text-dark card-body cardbody-color p-lg-5" enctype="multipart/form-data">
+			<h2 class="text-center">Offre déja reservé</h2>
+
+			<div class="mb-2">
+				<textarea class="form-control" id="message" name="message" rows="3" disabled><?php echo $advert['reservation_message']; ?></textarea>
+			</div>
+
+		</form>
+
+		<?php } ?>
+
 		<div class="text-center">
-				<a href="/catalog.php" class="btn btn-primary px-5 mb-5 text-uppercase">Retour</a>
+			<a href="/catalog.php" class="btn btn-primary px-5 mb-5 text-uppercase">Retour</a>
 		</div>
 
 	</body>
@@ -60,21 +74,13 @@
 			$advertManager = new AdvertManager($conn);
 			$advert = $advertManager->getAdvertById($_GET['id']);
 
-			//var_dump($advert);
+			$message = $_POST['message'];
+			$id = $advert['id_advert'];
 
-			$advertModify = new Advert([
-				'title' => $advert['title'],
-				'description' => $advert['description'], 
-				'postcode' => $advert['postcode'],
-				'city' => $advert['city'],
-				'price' => $advert['price'],
-				'categoryId' => $advert['category_id'],
-				'reservation_message' => $_POST['message']
-			]);
+			// echo("id : " . $id);
+			// echo ("message :" . $message);
 
-			//var_dump($advertModify);
-
-			if ($advertManager->updateAdvert($advertModify)) {
+			if ($advertManager->addReserAdvert($id, $message)) {
 				echo "Annonce a bien été réservé !";
 			}else {
 				echo "PROBLEME : L'annonce n'a pas été réservé.";

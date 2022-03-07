@@ -35,7 +35,7 @@ class Advert{
 	public function getCreatedAt() { return $this->created_at;}
 
 	private function setId_advert(int $id) {
-		$this->id = $id;
+		$this->id_advert = $id;
 		return $this;
 	}
 

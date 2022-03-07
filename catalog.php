@@ -38,7 +38,7 @@
 					<td><?= $advert['created_at'] ?></td>
 					<td>
 						<?php 
-							if ($advert['reservation_message'] == NULL){
+							if (empty($advert['reservation_message'])){
 								echo "Disponible";
 							}else{
 								echo "Reservé!";
