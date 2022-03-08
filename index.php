@@ -34,7 +34,9 @@
 						<div class="d-flex flex-row align-items-center">
 							<h4 class="mr-1"><?= number_format($advert['price'], 2, ',', ' ') ?> &euro;</h4>
 						</div>
-						<h6 class="text-success"><?= ucfirst($advert['category']) ?></h6>
+						<h6 <?php if ($advert['category'] == "vente"){
+							echo "class='text-success'";
+							}else echo "class='text-orange'";?>><?= ucfirst($advert['category'])?></h6>
 						<h6>Annonce crée le :<?= $advert['created_at'] ?></h6>
 					</div>
 				</div>
