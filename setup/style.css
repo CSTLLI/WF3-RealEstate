@@ -12,7 +12,7 @@
 /******************************************************************************************/
 
 /* IMPORTATIONS */
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 :root{
     --white: #ffffff;
@@ -26,24 +26,95 @@
 }
 
 html{
-	font-family: 'Inter', serif;
+	font-family: 'Ubuntu', sans-serif !important;
+	font-size: 67,5%;
 }
 
 body{
-	font-size: 16px;
+	font-size: 1.6rem;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
-	background: var(--gray-light);
+	width: 90%;
+	margin: auto;
 }
 
-a{
-	text-decoration: none;
-	color: var(--white);
+header{
+	margin-bottom: 100px;
+}
+
+/* ### HEADER */
+
+#logo,
+#logo i{
+	font-size: 1.8rem;
+	font-weight: 500;
+	color: black;
+}
+
+nav{
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
 	align-items: center;
 }
 
-a:hover{
-	color: var(--gray-dark);
-	transition: 350ms ease-in-out;
+nav a,
+nav a i{
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: gray;
+	text-decoration: none;
+}
+
+nav a:hover, 
+nav a i:hover{
+	color: black;
+}
+
+#btnAdd{
+	color: black;
+	border: 1px solid rgb(114, 110, 110);
+	border-radius: 30px;
+	padding: 0 15px;
+}
+
+#background{
+	position: relative;
+	background-image: url("/setup/images/header.jpg");
+	background-size: cover;
+	transform: scaleX(-1);
+	height: 70vh;
+	background-position: center;
+	margin: 20px 0;
+	border-radius: 35px;
+	border: 1px solid gray;
+}
+
+#panel{
+	position: absolute;
+	bottom: -50px;
+	width: 80%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	transform: scaleX(-1);
+}
+
+.cards{
+	border-radius: 35px;
+	border: 1px solid gray;
+	padding: 50px 80px;
+	display: flex;
+	gap: 20px;
+	background-color: white;
+	justify-content: center;
+}
+
+.my20{
+	margin: 20px 0 !important;
+}
+
+.desc{
+	font-size: 1.2rem;
+	color: gray;
 }
