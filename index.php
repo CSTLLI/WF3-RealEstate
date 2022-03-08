@@ -25,7 +25,12 @@
 					<div class="col-md-6 mt-1">
 						<a <?php echo "href=/view.php?id=" . $advert['id_advert'] ?>><?= mb_strtoupper($advert['title']) ?></a>
 
-						<div class="mt-1 mb-1 spec-1"><span class="desc"><?= ucfirst($advert['description']) ?></span</div>
+						<div class="mt-1 mb-1 spec-1"><span class="desc">
+							<?php if (strlen($advert['description']) >= 40){
+								echo substr(ucfirst($advert['description']), 0, 40) . "...";
+							}else echo ucfirst($advert['description'])
+							?>
+						</span</div>
 						<div class="mt-1 mb-1 spec-1"><span><?= $advert['postcode']?></span></div>
 						<p class="text-justify text-truncate para mb-0"><?= $advert['city']?><br><br></p>
 					</div>
@@ -34,15 +39,15 @@
 						<div class="d-flex flex-row align-items-center">
 							<h4 class="mr-1"><?= number_format($advert['price'], 2, ',', ' ') ?> &euro;</h4>
 						</div>
-						<h6 <?php if ($advert['category'] == "vente"){
-							echo "class='text-success'";
-							}else echo "class='text-orange'";?>><?= ucfirst($advert['category'])?></h6>
-						<h6>Annonce crée le :<?= $advert['created_at'] ?></h6>
+						<h6 <?php if ($advert['category'] == "vente"){ echo "class='text-success'"; }else echo "class='text-orange'";?>>
+							<?= ucfirst($advert['category'])?>
+						</h6>
+						<h6>Annonce crée le : <?= $advert['created_at'] ?></h6>
+						<h6><?php if (empty($advert['reservation_message'])){ echo "Disponible"; }else echo "Reservé!";?></h6>	
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- <?php endforeach; ?> -->
-		</div>
 	</body>
 </html>
